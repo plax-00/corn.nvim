@@ -131,12 +131,12 @@ M.render = function(items)
       append_to_line(' ' .. message_line, utils.diag_severity_to_hl_group(item.severity))
       -- extra info on the last line only
       if j == #message_lines then
-        append_to_line(' ' .. item.code .. '', 'Folded')
-        append_to_line(' ' .. item.source, 'Comment')
+        if item.code then append_to_line(' ' .. item.code .. '', 'Folded') end
+        if item.source then append_to_line(' ' .. item.source, 'Comment') end
         if config.opts.scope == 'line' then
-          append_to_line(' ' .. ':' .. item.col, 'Comment')
+          if item.col then append_to_line(' ' .. ':' .. item.col, 'Comment') end
         elseif config.opts.scope == 'file' then
-          append_to_line(' ' .. item.lnum+1 .. ':' .. item.col, 'Comment')
+          if item.lnum and item.col then append_to_line(' ' .. item.lnum+1 .. ':' .. item.col, 'Comment') end
         end
       end
 
